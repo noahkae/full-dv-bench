@@ -1,0 +1,10 @@
+# Core (also what the ROS 2 node needs): Python >= 3.8, numpy >= 1.17
+numpy
+scipy            # optional but recommended: KD-tree DBSCAN, Delaunay, image labelling (numpy fallbacks exist)
+# GUI + 3D bench
+PyQt5
+pyqtgraph        # 0.13.3 is the last release for Python 3.8 (pip picks it automatically)
+moderngl         # 3D view + rendered cameras (optional: the bench falls back to detection-level cameras)
+msgpack>=0.5.6   # fsds_lite's AirSim RPC shim (only if you run fsds_lite standalone)
+# tests
+pytest

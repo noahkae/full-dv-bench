@@ -1,0 +1,112 @@
+{
+  "name": "kit_style",
+  "description": "Pandar40P LiDAR only - KIT 2021 drove without cameras. 40 rings see cones to ~55 m. Try the MPC (lateral) and Delaunay (planner fallback) here: both need tuning before they beat pure pursuit + boundaries on this rig.",
+  "vehicle": "ucr_ev",
+  "rig": {
+    "name": "pandar",
+    "sensors": [
+      {
+        "name": "lidar",
+        "type": "lidar",
+        "mount": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.35,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {
+          "channels": 40,
+          "vfov_upper": 7.0,
+          "vfov_lower": -16.0,
+          "hfov": 360.0,
+          "h_res_deg": 0.2,
+          "rate_hz": 10.0,
+          "max_range": 200.0,
+          "range_noise": 0.02
+        },
+        "algorithm": {
+          "name": "lidar_grid",
+          "params": {}
+        },
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Hesai Pandar40P (KIT 2021)"
+      },
+      {
+        "name": "wheels",
+        "type": "wheel_speed",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {},
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Wheel speed sensors"
+      },
+      {
+        "name": "imu",
+        "type": "imu",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {},
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "IMU (MPU-6000 class)"
+      }
+    ]
+  },
+  "stages": {
+    "fusion": {
+      "name": "nearest_assoc",
+      "params": {}
+    },
+    "odometry": {
+      "name": "dead_reckoning",
+      "params": {}
+    },
+    "mapping": {
+      "name": "cone_map",
+      "params": {}
+    },
+    "planner": {
+      "name": "track_template",
+      "params": {
+        "fallback": "boundaries"
+      }
+    },
+    "speed": {
+      "name": "grip_limited",
+      "params": {}
+    },
+    "lateral": {
+      "name": "pure_pursuit",
+      "params": {}
+    },
+    "longitudinal": {
+      "name": "pid_speed",
+      "params": {}
+    },
+    "mission": {
+      "name": "auto",
+      "params": {}
+    }
+  },
+  "pipeline_hz": 20.0,
+  "gates": {},
+  "saved": "2026-11-10 00:08:37"
+}

@@ -1,0 +1,159 @@
+{
+  "name": "lidar_camera",
+  "description": "VLP-16 + wide mono camera, EKF with GNSS. Fusion = LiDAR first, camera fills the gaps (most robust today). nearest_assoc (covariance-gated LiDAR range + camera colour) is the better idea but still loses the track on the tight timeless maps - the open perception problem to work on.",
+  "vehicle": "ucr_ev",
+  "rig": {
+    "name": "lidar_camera",
+    "sensors": [
+      {
+        "name": "lidar",
+        "type": "lidar",
+        "mount": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.35,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {
+          "channels": 16,
+          "vfov_upper": 15.0,
+          "vfov_lower": -15.0,
+          "hfov": 360.0,
+          "h_res_deg": 0.2,
+          "rate_hz": 10.0,
+          "max_range": 100.0,
+          "range_noise": 0.03
+        },
+        "algorithm": {
+          "name": "lidar_grid",
+          "params": {}
+        },
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Velodyne VLP-16 (IIT Bombay)"
+      },
+      {
+        "name": "cam",
+        "type": "camera",
+        "mount": {
+          "x": -0.2,
+          "y": 0.0,
+          "z": 1.1,
+          "roll": 0.0,
+          "pitch": 4.0,
+          "yaw": 0.0
+        },
+        "params": {
+          "width": 1920,
+          "height": 1080,
+          "hfov": 90.0,
+          "rate_hz": 30.0,
+          "max_range": 30.0
+        },
+        "algorithm": {
+          "name": "camera_color_blob",
+          "params": {}
+        },
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Mono wide 1080p"
+      },
+      {
+        "name": "wheels",
+        "type": "wheel_speed",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {},
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Wheel speed sensors"
+      },
+      {
+        "name": "imu",
+        "type": "imu",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {},
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "IMU (MPU-6000 class)"
+      },
+      {
+        "name": "gnss",
+        "type": "gnss",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 1.2,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {
+          "noise": 0.02
+        },
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "GNSS RTK (u-blox F9P)"
+      }
+    ]
+  },
+  "stages": {
+    "fusion": {
+      "name": "priority",
+      "params": {
+        "primary": "lidar"
+      }
+    },
+    "odometry": {
+      "name": "ekf",
+      "params": {}
+    },
+    "mapping": {
+      "name": "cone_map",
+      "params": {}
+    },
+    "planner": {
+      "name": "track_template",
+      "params": {
+        "fallback": "boundaries"
+      }
+    },
+    "speed": {
+      "name": "grip_limited",
+      "params": {}
+    },
+    "lateral": {
+      "name": "pure_pursuit",
+      "params": {}
+    },
+    "longitudinal": {
+      "name": "pid_speed",
+      "params": {}
+    },
+    "mission": {
+      "name": "auto",
+      "params": {}
+    }
+  },
+  "pipeline_hz": 20.0,
+  "gates": {},
+  "saved": "2026-11-10 00:08:37"
+}

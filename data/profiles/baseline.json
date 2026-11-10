@@ -1,0 +1,119 @@
+{
+  "name": "baseline",
+  "description": "One VLP-16 LiDAR, dead reckoning + cone-map SLAM, boundary planner, pure pursuit. Completes every event on the timeless bench - the reference to beat.",
+  "vehicle": "ucr_ev",
+  "rig": {
+    "name": "lidar_baseline",
+    "sensors": [
+      {
+        "name": "lidar",
+        "type": "lidar",
+        "mount": {
+          "x": 1.0,
+          "y": 0.0,
+          "z": 0.35,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {
+          "channels": 16,
+          "vfov_upper": 15.0,
+          "vfov_lower": -15.0,
+          "hfov": 360.0,
+          "h_res_deg": 0.2,
+          "rate_hz": 10.0,
+          "max_range": 100.0,
+          "range_noise": 0.03
+        },
+        "algorithm": {
+          "name": "lidar_grid",
+          "params": {}
+        },
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Velodyne VLP-16 (IIT Bombay)"
+      },
+      {
+        "name": "wheels",
+        "type": "wheel_speed",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {},
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "Wheel speed sensors"
+      },
+      {
+        "name": "imu",
+        "type": "imu",
+        "mount": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "roll": 0.0,
+          "pitch": 0.0,
+          "yaw": 0.0
+        },
+        "params": {},
+        "algorithm": null,
+        "fidelity": "auto",
+        "enabled": true,
+        "preset": "IMU (MPU-6000 class)"
+      }
+    ]
+  },
+  "stages": {
+    "fusion": {
+      "name": "nearest_assoc",
+      "params": {}
+    },
+    "odometry": {
+      "name": "dead_reckoning",
+      "params": {}
+    },
+    "mapping": {
+      "name": "cone_map",
+      "params": {}
+    },
+    "planner": {
+      "name": "track_template",
+      "params": {}
+    },
+    "speed": {
+      "name": "grip_limited",
+      "params": {}
+    },
+    "lateral": {
+      "name": "pure_pursuit",
+      "params": {}
+    },
+    "longitudinal": {
+      "name": "pid_speed",
+      "params": {}
+    },
+    "mission": {
+      "name": "auto",
+      "params": {}
+    }
+  },
+  "pipeline_hz": 20.0,
+  "gates": {
+    "timeless": {
+      "passed": true,
+      "reasons": [],
+      "mean_doo": 0.73,
+      "mean_oc": 0.07,
+      "mean_total": 29.59,
+      "time": "2026-11-10 00:13"
+    }
+  },
+  "saved": "2026-11-10 00:13:49"
+}

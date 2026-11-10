@@ -1,0 +1,8 @@
+.venv/
+.venv38/
+__pycache__/
+*.pyc
+runs/
+.pytest_cache/
+ros/ucr_dv_ros/config/*.json
+ros/ucr_dv_ros/config/*.yaml

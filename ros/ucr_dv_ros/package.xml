@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>ucr_dv_ros</name>
+  <version>0.1.0</version>
+  <description>ROS 2 wrapper for the ucr_dv driverless stack: runs a ucr-dv-stack profile (the same Stack the benches test) on the fsds_ros2_bridge / fsds_lite topic contract.</description>
+  <maintainer email="dv@ucalgaryracing.ca">UCalgary Racing Driverless</maintainer>
+  <license>MIT</license>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-scipy</exec_depend>
+  <!-- fs_msgs (from the FSDS ROS 2 workspace) is optional: used for /control_command and /signal/finished -->
+  <test_depend>python3-pytest</test_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
